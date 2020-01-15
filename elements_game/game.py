@@ -28,18 +28,28 @@ def checkans():
     global game
     tans = noentry.get()
     if tans == answer:
-        messagebox.showinfo("Correct Answer!","Correct Answer!! Keep going")
+        messagebox.showinfo("Correct Answer!","Correct Answer!! The element's name was "+answer_name+". It's symbol was "+answer)
         generate_no()
         noentry.delete(0, 'end')
     else:
         incorrect_attempts = incorrect_attempts - 1
         if incorrect_attempts <= 0 :
-            messagebox.showinfo("Game over!","Game over! you have answered wrongly more than 5 times!")
+            messagebox.showinfo("Game over!","Game over! you have answered wrongly more than 5 times! The element's name was "+answer_name+". It's symbol was "+answer)
             game.destroy()
             home()
+        elif incorrect_attempts <= 3:
+            messagebox.showinfo("Wrong Answer!","Wrong Answer!! Try again. You have "+str(incorrect_attempts)+" attempts left\nHINT: Coming Soon")
+            noentry.delete(0, 'end')
         else:
             messagebox.showinfo("Wrong Answer!","Wrong Answer!! Try again. You have "+str(incorrect_attempts)+" attempts left")
             noentry.delete(0, 'end')
+
+def stopgame():
+    global game
+    res = messagebox.askyesno("Quit Game?","Are you sure you would like to quit the game?")
+    if res == True:
+        game.destroy()
+        home()
 
 def loadjson():
     global elements
@@ -68,7 +78,7 @@ def startgame():
     noentry.place(x=350, y=400, anchor="center")
     submit = Button(game, text='Submit', font=('Helvetica',25), command=checkans)
     submit.place(x=570, y=400, anchor="center")
-    stop = Button(game, text='Stop Game', font=('Helvetica',25))
+    stop = Button(game, text='Stop Game', font=('Helvetica',25),command=stopgame)
     stop.place(x=200, y=450, anchor="center")
     generateno = Button(game, text='Generate New no', font=('Helvetica',25),command=generate_no)
     generateno.place(x=390, y=450, anchor="center")
