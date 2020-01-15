@@ -22,6 +22,10 @@ def generate_no():
     answer_name = elements[atomic_no-1]['name']
     ano.config(text=atomic_no)
 
+def getans():
+    messagebox.showinfo("Answer","The element's name was "+answer_name+". It's symbol was "+answer+" with atomic number "+str(atomic_no))
+    generate_no()
+    
 def checkans():
     global noentry
     global incorrect_attempts
@@ -82,7 +86,7 @@ def startgame():
     stop.place(x=200, y=450, anchor="center")
     generateno = Button(game, text='Generate New no', font=('Helvetica',25),command=generate_no)
     generateno.place(x=390, y=450, anchor="center")
-    generateno = Button(game, text='Get Answer', font=('Helvetica',25))
+    generateno = Button(game, text='Get Answer', font=('Helvetica',25), command=getans)
     generateno.place(x=580, y=450, anchor="center")
     game.mainloop()
 
