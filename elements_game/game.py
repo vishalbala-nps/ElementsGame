@@ -25,7 +25,7 @@ def generate_no():
 def getans():
     messagebox.showinfo("Answer","The element's name was "+answer_name+". It's symbol was "+answer+" with atomic number "+str(atomic_no))
     generate_no()
-    
+
 def checkans():
     global noentry
     global incorrect_attempts
