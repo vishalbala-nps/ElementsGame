@@ -1,10 +1,22 @@
 from tkinter import *
 from tkinter import messagebox
+import json
 
 #Global Vars
 menu = ""
+elements = {}
 
 #Game Functions
+def loadjson():
+    global elements
+    try:
+        f = open("elements.json","r")
+        elements = json.loads(f.read())
+    except:
+        print("Unable to load elements.json file. Game quitting")
+        exit(1)
+
+
 def startgame():
     menu.destroy()
     game = Tk()
@@ -42,5 +54,5 @@ def home():
     help = Button(menu, text='Help', width=35, height=6 ,font='Times 20 bold', command=test)
     help.place(x=600, y=250, anchor="center")
     menu.mainloop()
-
+loadjson()
 home()
