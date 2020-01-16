@@ -81,7 +81,7 @@ def generate_no():
     ano.config(text=atomic_no)
 
 def getans():
-    messagebox.showinfo("Answer","The element's name was "+answer_name+". It's symbol was "+answer+" with atomic number "+str(atomic_no))
+    messagebox.showinfo("Answer","The element's name is "+answer_name+". It's symbol is "+answer+" with atomic number "+str(atomic_no))
     generate_no()
 
 def checkans():
@@ -90,20 +90,17 @@ def checkans():
     global game
     tans = noentry.get()
     if tans == answer:
-        messagebox.showinfo("Correct Answer!","Correct Answer!! The element's name was "+answer_name+". It's symbol was "+answer)
+        messagebox.showinfo("Correct Answer!","Correct Answer!! The element's name is "+answer_name+". It's symbol is "+answer)
         generate_no()
         noentry.delete(0, 'end')
     else:
         incorrect_attempts = incorrect_attempts - 1
         if incorrect_attempts <= 0 :
-            messagebox.showinfo("Game over!","Game over! you have answered wrongly more than 5 times! The element's name was "+answer_name+". It's symbol was "+answer)
+            messagebox.showerror("Game over!","Game over!\nYou have answered wrongly more than 5 times! The element's name is "+answer_name+". It's symbol is "+answer)
             game.destroy()
             home()
-        elif incorrect_attempts <= 4:
-            messagebox.showinfo("Wrong Answer!","Wrong Answer!! Try again. You have "+str(incorrect_attempts)+" attempts left\nHINT: "+generate_hint(atomic_no))
-            noentry.delete(0, 'end')
         else:
-            messagebox.showinfo("Wrong Answer!","Wrong Answer!! Try again. You have "+str(incorrect_attempts)+" attempts left")
+            messagebox.showwarning("Wrong Answer!","Wrong Answer!! Try again. You have "+str(incorrect_attempts)+" attempts left\nHINT: "+generate_hint(atomic_no))
             noentry.delete(0, 'end')
 
 def stopgame():
@@ -130,8 +127,8 @@ def startgame():
     menu.destroy()
     game = Tk()
     game.title("Elements game")
-    game.minsize(800,500)
-    game.maxsize(800,500)
+    game.minsize(800,600)
+    game.maxsize(800,600)
 
     f1 = Frame(game)
     f1.pack()
@@ -140,10 +137,13 @@ def startgame():
     f3 = Frame(game)
     f3.pack()
     f4 = Frame(game)
-    f4.pack()
+    f4.pack(side=BOTTOM,pady=5)
 
-    alabel = Label(f1,text="Find the Symbol of:", font=("Helvetica", 55)) 
+    alabel = Label(f1,text="Find the Symbol of:", font=("Helvetica", 55))
     alabel.pack()
+
+    blabel = Label(f1,text="(Case-Sensitive)", font=("Helvetica", 20))
+    blabel.pack()  
 
     ano = Label(f2,font=("Helvetica", 130))
     generate_no() 
@@ -164,14 +164,14 @@ def startgame():
 
 #Menu Screen Functions
 def test():
-    messagebox.showinfo("Help", "This is a Periodic Table of elements game. You will be given an atomic no. You will have to guess the element's symbol from it")
+    messagebox.showinfo("Help", "This is a Game of Periodic Table\nYou will be given an atomic number\nYou will have to guess the element's symbol")
 
 def home():
     global menu
     menu = Tk()
     menu.title("Elements game")
-    menu.maxsize(800,500)
-    menu.minsize(800,500)
+    menu.maxsize(800,600)
+    menu.minsize(800,600)
     tframe = Frame(menu)
     tframe.pack()
     bframe = Frame(menu)
